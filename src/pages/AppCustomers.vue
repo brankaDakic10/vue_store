@@ -30,6 +30,7 @@
                   <th>Last Name</th>
                   <th>Email</th>
                   <th>&nbsp</th>
+                  <th>&nbsp</th>
                 </tr>
           </thead>
           <tbody class="body-table">
@@ -39,6 +40,7 @@
                   <td>{{customer.lastName}}</td>
                   <td>{{customer.email}}</td>
                   <td><button @click="removeCustomer(customer)" class="btn btn-secondary">Delete</button></td>
+                  <td><router-link :to="'/customers/'+ customer.id" class="nav-link">Latest Purchases</router-link></td>
                 </tr>
           </tbody>
       </table>
