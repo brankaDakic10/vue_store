@@ -1,7 +1,13 @@
 <template>
   <div class="container">
-      
-    <article>
+   <article class="search">
+    <form class="text-center">
+      <label for="searchProduct">Enter product: </label><br>
+      <input v-model="searchProduct" id="searchProduct" class="text-center" type="text" placeholder="Search products"/>
+      <br><br>
+    </form>
+  </article>
+    <section>
       <table class="table">
           <thead class="header-table"> 
                 <tr>
@@ -12,7 +18,7 @@
                 </tr>
           </thead>
           <tbody class="body-table">
-                <tr v-for="(product, key) in products" :key="key">
+                <tr v-for="(product, key) in filterProducts" :key="key">
                   <td>{{product.id}}</td>
                   <td>{{product.title}}</td>
                   <td>{{product.quantity}}</td>
@@ -20,7 +26,7 @@
                 </tr>
           </tbody>
       </table>
-  </article>
+    </section>
   </div>
 </template>
 <script>
@@ -29,8 +35,16 @@ import {productService} from '../services/ProductService'
 export default {
   data(){
     return{
-      products:productService.list()
+      products:productService.list(),
+      searchProduct:''
     }
+  },
+  computed:{
+    filterProducts(){
+       return this.products.filter(product =>{
+           return product.title.toLowerCase().startsWith(this.searchProduct.toLowerCase())
+       })
+   }
   }
 }
 </script>
@@ -41,5 +55,9 @@ export default {
 
  .body-table{
    background-color: rgb(228, 233, 236);
+ }
+ .search{
+    font-weight: bold;
+     background-color: rgb(228, 233, 236);
  }
 </style>
