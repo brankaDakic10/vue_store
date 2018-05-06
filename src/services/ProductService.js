@@ -10,6 +10,13 @@ export default class ProductService{
   list(){
       return products
   }
+  increment(product){
+    product.quantity++
+  }
+  decrement(product){
+    
+    product.quantity--
+  }
 }
 
 export const productService=new ProductService()

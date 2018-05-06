@@ -14,6 +14,7 @@
                   <th>ID</th>
                   <th>Title</th>
                   <th>Quantity</th>
+                   <th>&nbsp;</th>
         
                 </tr>
           </thead>
@@ -22,6 +23,11 @@
                   <td>{{product.id}}</td>
                   <td>{{product.title}}</td>
                   <td>{{product.quantity}}</td>
+                  <td><div class="btn-group">
+        <button @click="incrementQuantity(product)" class="btn btn-secondary btn-sm">+</button>
+       <button @click="decrementQuantity(product)" class="btn btn-secondary btn-sm"
+       v-if="product.quantity">-</button>
+       </div></td>
                   
                 </tr>
           </tbody>
@@ -45,6 +51,16 @@ export default {
            return product.title.toLowerCase().startsWith(this.searchProduct.toLowerCase())
        })
    }
+  },
+  methods:{
+    incrementQuantity(product){
+      productService.increment(product)
+
+    },
+    decrementQuantity(product){
+      productService.decrement(product)
+    }
+
   }
 }
 </script>
